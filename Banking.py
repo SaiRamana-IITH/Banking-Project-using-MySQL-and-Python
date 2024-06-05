@@ -7,7 +7,7 @@ def clear():
 
 def account_status(acno):
     conn = mysql.connector.connect(
-        host ='localhost', database = 'bankproject', user = 'root', password = 'Riyaji@01')
+        host ='localhost', database = 'bankproject', user = 'root', password = 'Ramana@123')
     cursor = conn.cursor()
     sql = "select status, balance from customer where acno = '"+acno+"'"
     result = cursor.execute(sql)
@@ -18,7 +18,7 @@ def account_status(acno):
 
 def deposit_amount():
     conn = mysql.connector.connect(
-        host ='localhost', database = 'bankproject', user = 'root', password = 'Riyaji@01')
+        host ='localhost', database = 'bankproject', user = 'root', password = 'Ramana@123')
     cursor = conn.cursor()
     clear()
     acno = input('Enter account No:')
@@ -41,7 +41,7 @@ def deposit_amount():
 
 def withdraw_amount():
     conn = mysql.connector.connect(
-        host ='localhost', database = 'bankproject', user = 'root', password = 'Riyaji@01')
+        host ='localhost', database = 'bankproject', user = 'root', password = 'Ramana@123')
     cursor = conn.cursor()
     clear()
     acno = input('Enter account No:')
@@ -81,7 +81,7 @@ def transaction_menu():
 
 def search_menu():
     conn = mysql.connector.connect(
-        host ='localhost', database = 'bankproject', user = 'root', password = 'Riyaji@01')
+        host ='localhost', database = 'bankproject', user = 'root', password = 'Ramana@123')
     cursor = conn.cursor()
     while True:
         print(' Search Menu')
@@ -121,18 +121,18 @@ def search_menu():
         print('-'*80)
         for record in records:
             print(record[0],record[1],record[2],record[3],record[4],record[5],record[6],record[7],record[8])
-            if(n<=0):
+            if n<=0:
                 print(field_name,' ',value,' deos not exist ')
             wait = input('\n\n\n Press any key to continue....')
-        conn.close()
-        wait = input('\n\n\n Press any key to continue....')
+    conn.close()
+    wait = input('\n\n\n Press any key to continue....')
 
 
 def account_details():
     clear()
     acno = input('Enter account no :')
     conn = mysql.connector.connect(
-        host ='localhost', database = 'bankproject', user = 'root', password = 'Riyaji@01')
+        host ='localhost', database = 'bankproject', user = 'root', password = 'Ramana@123')
     cursor = conn.cursor()
     sql = 'select* from customer where acno = '+acno+';'
     sql1 = 'select tid,dot,amount,type from transaction t where t.acno = '+acno+';'
@@ -158,26 +158,30 @@ def account_details():
 
 def add_account():
     conn = mysql.connector.connect(
-        host ='localhost', database = 'bankproject', user = 'root', password = 'Riyaji@01')
+        host ='localhost', database = 'bankproject', user = 'root', password = 'Ramana@123')
+    
     cursor = conn.cursor()
 
     name = input('Enter name:')
-    addr = input('Enter address ')
-    phone = input('Enter Phone no :')
+    addr = input('Enter address: ')
+    phone = input('Enter Phone no:')
     email = input('Enter Email:')
     aadhar = input('Enter Aadhar no:')
-    actype = input('Account Type(savings/current ) :')
-    balance = input('Enter opening balance : ')
-    sql = 'insert into customer(name,address,phone,email,aadhar_no,acc_type,balance,status) values ( "' +name+ '" , "' +addr+ '", "' +phone+ '", "' +email+ '", "' +aadhar+ '", "' +actype+ '", "' +balance+ '");'
+    actype = input('Account Type(savings/current ):')
+    stat = input('Account status:')
+    balance = input('Enter opening balance: ')
+    sql = 'insert into customer(name,address,phone,email,aadhar_no,acc_type,status,balance) values ( "' +name+ '" , "' +addr+ '", "' +phone+ '", "' +email+ '", "' +aadhar+ '", "' +actype+ '", "' +stat+ '", "' +balance+ '");'
     cursor.execute(sql)
+    conn.close()
 
     print('\n\nNew customer added successfully')
     wait = input('\n\n\n Press any key to continue....')
 
 
+
 def modify_account():
     conn = mysql.connector.connect(
-        host ='localhost', database = 'bankproject', user = 'root', password = 'Riyaji@01')
+        host ='localhost', database = 'bankproject', user = 'root', password = 'Ramana@123')
     cursor = conn.cursor()
     clear()
     acno = input('Enter customer Account No :')
@@ -186,8 +190,10 @@ def modify_account():
     print('\n 2. Customer Address')
     print('\n 3. Customer Phone No')
     print('\n 4. Customer Email ID')
+    print('\n 5. Aadhar number')
+    print('\n 6. Account type\n')
     choice = int(input('What do you want to change ? '))
-    new_data = input('Enter new value :')
+    new_data = input('Enter new value : ')
     field_name = ''
     if choice == 1:
         field_name = 'name'
@@ -197,6 +203,11 @@ def modify_account():
         field_name = 'phone'
     if choice == 4:
         field_name = 'email'
+    if choice == 5:
+        field_name = 'aadhar_no'
+    if choice == 6:
+        field_name = 'acc_type'
+    
     sql = 'update customer set ' + field_name + '="'+ new_data + '" where acno ='+acno+';'
     print(sql)
     cursor.execute(sql)
@@ -206,7 +217,7 @@ def modify_account():
 
 def close_account():
     conn = mysql.connector.connect(
-        host ='localhost', database = 'bankproject', user = 'root', password = 'Riyaji@01')
+        host ='localhost', database = 'bankproject', user = 'root', password = 'Ramana@123')
     cursor = conn.cursor()
     clear()
     acno = input('Enter customer Account No :')
@@ -218,7 +229,7 @@ def close_account():
 
 def activate_account():
     conn = mysql.connector.connect(
-        host ='localhost', database = 'bankproject', user = 'root', password = 'Riyaji@01')
+        host ='localhost', database = 'bankproject', user = 'root', password = 'Ramana@123')
     cursor = conn.cursor()
     clear()
     acno = input('Enter customer Account No :')
@@ -239,7 +250,7 @@ def main_menu():
         print('\n4. Activate Account')
         print('\n5. Transaction Menu')
         print('\n6. Search Menu')
-        print('\n7. Close application')
+        #print('\n7. Close application')
         print('\n\n')
         choice = int(input('Enter your choice ....'))
 
@@ -255,8 +266,8 @@ def main_menu():
             transaction_menu()
         if choice == 6:
             search_menu()
-        if choice == 7:
-            report_menu()
+        # if choice == 7:
+        #     report_menu()
         if choice == 8:
             break
 
