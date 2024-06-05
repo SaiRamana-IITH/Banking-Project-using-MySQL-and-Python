@@ -1,7 +1,9 @@
+USE bankproject;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
-SET time_zone = "+00.00";
+SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE IF NOT EXISTS `customer`(
@@ -37,3 +39,5 @@ INSERT INTO `transaction` (`tid`,`dot`,`amount`,`type`,`acno`) VALUES
 (1, '2020-10-16', 2000, 'deposit', 1),
 (2, '2020-10-15', 2000, 'deposit', 2),
 (3, '2020-10-18', 1200, 'withdraw', 1);
+
+COMMIT;
